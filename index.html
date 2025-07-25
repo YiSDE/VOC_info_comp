@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativa: VOC Analytics vs. Competidores Directos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    SPA Narrative Plan:
+    1.  Hook: A clear title establishing the purpose - a direct comparison.
+    2.  Core Visualization: A grouped bar chart comparing VOC Analytics against its direct competitors across key strategic features. This is the centerpiece.
+    3.  Feature Explanation: A brief section explaining what each feature on the chart means in practice.
+    4.  Competitor Deep Dive: A summary section with cards for each competitor, providing the qualitative context behind their scores.
+    5.  Conclusion: A final statement summarizing why VOC Analytics wins.
+
+    Visualization Selection Plan:
+    - Main Comparison: Goal=Compare, Viz=Grouped Bar Chart (Chart.js). Justification: Ideal for comparing multiple entities across a common set of scored attributes. Visually clear and effective. NO SVG.
+    - Qualitative Info: Goal=Organize, Viz=Styled HTML Cards (Tailwind). Justification: Best for structured text summaries. NO SVG.
+
+    Color Palette: Energetic & Playful
+
+    Constraint Confirmation: NEITHER Mermaid JS NOR SVG were used in this output. All visualizations are rendered via Chart.js on Canvas or using styled HTML.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F5F2; /* Light Gray */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 600px;
+        }
+         @media (min-width: 768px) {
+            .chart-container {
+                height: 60vh;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .text-coral { color: #FF6B6B; }
+        .text-teal { color: #4D96A9; }
+        .text-yellow { color: #FCA104; }
+        .text-purple { color: #6C5B7B; }
+        .text-dark-blue { color: #071E3D; }
+    </style>
+</head>
+<body class="text-dark-blue">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-dark-blue mb-2">VOC Analytics vs. el Mercado</h1>
+            <p class="text-lg md:text-xl text-teal font-bold">Una Comparativa Directa de Propuesta de Valor</p>
+            <p class="max-w-3xl mx-auto mt-4 text-gray-600">Analizamos cómo se compara nuestra plataforma con los principales competidores en los atributos que realmente definen el éxito en la Experiencia de Cliente.</p>
+        </header>
+
+        <main>
+            <section id="comparison-chart" class="mb-16 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-2 text-dark-blue">Análisis Comparativo de Capacidades</h2>
+                <p class="text-center max-w-3xl mx-auto text-gray-700 mb-8">El siguiente gráfico puntúa de 1 a 10 a cada plataforma. Una puntuación más alta indica un mejor desempeño en esa capacidad estratégica, demostrando dónde VOC Analytics ofrece un valor superior y diferenciado.</p>
+                <div class="chart-container">
+                    <canvas id="competitorBarChart"></canvas>
+                </div>
+            </section>
+
+            <section id="features-explained" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8 text-dark-blue">¿Qué Significan estos Atributos?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="text-center p-4">
+                        <h3 class="font-bold text-teal">ROI Demostrable</h3>
+                        <p class="text-sm text-gray-600">Capacidad nativa de conectar insights de CX con impacto financiero.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <h3 class="font-bold text-teal">Enfoque Product-Led</h3>
+                        <p class="text-sm text-gray-600">El producto es intuitivo y entrega valor sin depender de consultoría.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <h3 class="font-bold text-teal">Insights Predictivos</h3>
+                        <p class="text-sm text-gray-600">Va más allá del reporte histórico para anticipar tendencias y riesgos.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <h3 class="font-bold text-teal">Facilidad de Uso</h3>
+                        <p class="text-sm text-gray-600">La plataforma es ágil y fácil de gestionar sin un equipo técnico dedicado.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <h3 class="font-bold text-teal">Costo-Efectividad</h3>
+                        <p class="text-sm text-gray-600">Relación precio-valor adaptada a la realidad del mercado LATAM.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="competitor-summary" class="mb-16">
+                 <h2 class="text-3xl font-bold text-center mb-8 text-dark-blue">Resumen Cualitativo de Competidores</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold">Qualtrics & Medallia</h3>
+                        <p class="font-semibold text-gray-500 mb-4">Los Gigantes Globales</p>
+                        <p class="text-gray-700"><strong class="text-teal">Fortalezas:</strong> Son plataformas extremadamente potentes y reconocidas, con capacidades de análisis muy profundas.</p>
+                        <p class="text-gray-700 mt-2"><strong class="text-coral">Nuestra Oportunidad:</strong> Su modelo es demasiado costoso y complejo para la mayoría en LATAM. El valor real a menudo está bloqueado detrás de costosos servicios de consultoría, un modelo que nosotros rompemos con nuestro enfoque "Product-Led".</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-2xl font-bold">SurveySparrow & QuestionPro</h3>
+                        <p class="font-semibold text-gray-500 mb-4">Las Herramientas de Encuestas</p>
+                        <p class="text-gray-700"><strong class="text-teal">Fortalezas:</strong> Son fáciles de usar y tienen un precio accesible, con buena presencia local (en el caso de QuestionPro).</p>
+                        <p class="text-gray-700 mt-2"><strong class="text-coral">Nuestra Oportunidad:</strong> Su foco está en la recolección de datos (la encuesta), no en el análisis profundo. Carecen de la capacidad de generar insights predictivos y de conectar los datos con el ROI, que es nuestra principal fortaleza.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conclusion" class="bg-dark-blue text-white rounded-lg shadow-2xl p-8 md:p-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-yellow">La Conclusión es Clara</h2>
+                <p class="font-semibold text-gray-500 mb-4 md:text-xl max-w-4xl mx-auto leading-relaxed">
+                    VOC Analytics no es solo una alternativa; es la evolución lógica. Ofrecemos la **potencia analítica** de los gigantes globales, pero con la **agilidad, el enfoque en ROI y la eficiencia de costos** que el mercado latinoamericano demanda.
+                </p>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="font-bold text-dark-blue text-2xl">Sixbell</p>
+            <p class="text-gray-600">Liderando la conversación sobre CX y Tecnología.</p>
+        </footer>
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth = 16) => {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine += (currentLine.length === 0 ? '' : ' ') + word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const ctx = document.getElementById('competitorBarChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['ROI Demostrable', 'Enfoque Product-Led', 'Insights Predictivos', 'Facilidad de Uso', 'Costo-Efectividad (LATAM)'],
+                datasets: [
+                    {
+                        label: 'VOC Analytics (Sixbell)',
+                        data: [9, 10, 8, 8, 9],
+                        backgroundColor: '#4D96A9', // Teal
+                        borderColor: '#4D96A9',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'Qualtrics',
+                        data: [5, 3, 9, 4, 2],
+                        backgroundColor: '#FF6B6B', // Coral
+                        borderColor: '#FF6B6B',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'Medallia',
+                        data: [4, 3, 7, 5, 3],
+                        backgroundColor: 'rgba(255, 107, 107, 0.6)', // Coral light
+                        borderColor: 'rgba(255, 107, 107, 0.6)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'SurveySparrow',
+                        data: [2, 8, 2, 9, 8],
+                        backgroundColor: '#FCA104', // Yellow
+                        borderColor: '#FCA104',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    },
+                    {
+                        label: 'QuestionPro',
+                        data: [3, 6, 4, 7, 8],
+                        backgroundColor: 'rgba(252, 161, 4, 0.6)', // Yellow light
+                        borderColor: 'rgba(252, 161, 4, 0.6)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }
+                ]
+            },
+            options: {
+                ...commonTooltipOptions,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Puntuación (de 1 a 10)'
+                        }
+                    }
+                },
+                plugins: {
+                    ...commonTooltipOptions.plugins,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
